@@ -1,0 +1,63 @@
+#include <LiquidCrystal.h>
+LiquidCrystal lcd (2,3,4,5,6,7);
+int  trigpin = 8;
+int echopin = 9;
+float duration;
+float distance;
+
+#include <DHT.h>
+#include <LiquidCrystal.h>
+DHT dht(13, DHT11);
+char name1;
+
+void setup() {
+ Serial.begin(9600);
+  lcd.begin(16,2);
+  dht.begin();
+
+  lcd.begin(16,2);
+Serial.begin(9600);
+pinMode(trigpin,OUTPUT);
+pinMode(echopin,INPUT);
+
+}
+
+void loop() {
+  delay(2000);
+  float h= dht.readHumidity();
+  float t= dht.readTemperature();
+
+  lcd.setCursor(0,0);
+  lcd.print("Humidity");
+  lcd.print(h);
+  lcd.print("%");
+  delay(100);
+  lcd.clear();
+  lcd.setCursor(0,1);
+  lcd.print("Temp");
+  lcd.print(t);
+  lcd.print(" *C");
+  delay(1000);
+  lcd.clear();
+
+  Serial.print("Humidity : ");
+  Serial.print(h);
+  Serial.println("%");
+
+  Serial.print("temp : ");
+  Serial.print(t);
+  Serial.println("*C");
+  
+   digitalWrite(8,LOW);
+  delay(100);
+  digitalWrite(8,HIGH);
+  delay(100);
+  digitalWrite(8,LOW);
+  duration=pulseIn(9,HIGH);
+  distance=0.034*duration/2.0;
+  lcd.setCursor(0,0);
+  lcd.print("Distance: ");
+  lcd.print(distance);
+ Serial.println("Distance: " + String (distance)+"cm" );
+ delay(1000);
+}
