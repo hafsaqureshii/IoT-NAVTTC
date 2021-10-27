@@ -1,0 +1,53 @@
+#define LMf 2;
+#define LMb 3;
+#define RMf 4;
+#define RMb 5;
+#define LS 6;
+#define RS 7;
+#define LS_value;
+#define RS_value;
+
+void setup()
+{
+    pinMode(LMf,OUTPUT);
+    pinMode(LMb,OUTPUT);
+    pinMode(RMf,OUTPUT);
+    pinMode(RMb,OUTPUT);
+    pinMode(LS,INPUT);
+    pinMode(RS,iINPUT);
+}
+void loop()
+{
+ LS_value = digitalRead(LS);
+ RS_value = digitalRead(RS);
+ 
+ if(LS_value ==0 && RS_value == 0)
+ {
+ digitalWrite(LMf,HIGH);
+ digitalWrite(LMb,HIGH);
+ digitalWrite(RMf,HIGH);
+ digitalWrite(RMb,HIGH);
+ }
+ 
+ else if (LS_value > 0 && RS_value == 0)
+ {
+ digitalWrite(LMf,LOW);
+ digitalWrite(LMb,LOW);
+ digitalWrite(RMf,HIGH);
+ digitalWrite(RMb,LOW);
+ }
+ 
+ else if (LS_value == 0 && RS_value > 0)
+ {
+ digitalWrite(LMf,HIGH);
+ digitalWrite(LMb,LOW);
+ digitalWrite(RMf,LOW);
+ digitalWrite(RMb,LOW);
+ }
+ 
+ else
+ digitalWrite(LMf,LOW);
+ digitalWrite(LMb,LOW);
+ digitalWrite(RMf,LOW);
+ digitalWrite(RMb,LOW);
+}
